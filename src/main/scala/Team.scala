@@ -27,21 +27,23 @@ class Team {
 
     for (i <- 0 until number) {
       val crea = classe.newInstance()
-      //teamMembers += StoreCreature.add(crea)
+      teamMembers += CommonCreature.add(crea)
     }
   }
 
-  /*
+
   def vertices(): ArrayBuffer[(VertexId, Int)] = {
-    val result = members.zipWithIndex.map{case (creature, index) => (index.toLong, creature)}
+    val result = teamMembers.zipWithIndex.map{case (creature, index) => (index.toLong, creature)}
 
     result
   }
 
   def edges(): ArrayBuffer[Edge[Int]] = {
-    val result = for (i <- 0 until members.length; j <- (i + 1) until members.length) yield Edge(i.toLong, j.toLong, 1)
+    val result =
+      for (i <- 0 until teamMembers.length; j <- (i + 1) until teamMembers.length)
+        yield Edge(i.toLong, j.toLong, 1)
 
     result.to[mutable.ArrayBuffer]
-  }*/
+  }
 
 }
