@@ -95,22 +95,24 @@ object Main extends App {
 
     graphNplus1.map(id => {
       var key = graphN.vertices.filter(_._1 == id).first()._2
-      var c = commonCreature.value.getAbstractCreature(key)
+      var creature = commonCreature.value.getAbstractCreature(key)
 
-      c.update()
-      if (c.deadSince<1) {
-        c.naiveAttack(id, graphN, commonCreature)
+      creature.refresh()
+      if (creature.deadSince<1) {
+        creature.naiveAttack(id, graphN, commonCreature)
       }
       else {
-        val name = c.name
-        val deadSince = c.deadSince
+        val name = creature.name
+        val deadSince = creature.deadSince
         println(s"$name $id died $deadSince turns ago\n")
-        if (c.getSide() == "Ally")
-          alliesDead.add(1)
+
+        //count number of each team dead
+        if (creature.getSide() == "Ally")
+          coalitionDead.add(1)
         else
-          enemiesDead.add(1)
+          enemyDead.add(1)
       }
-    }
+    })//end map
 
 
 

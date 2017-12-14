@@ -20,7 +20,7 @@ class Team {
     val classe = creature.getClass()
 
     println(creature.name, number)
-    println("regen:", creature.reg)
+    println("regen:", creature.regen)
     println("health:", creature.hp)
     println("armor:", creature.armor)
     println("\n")
@@ -32,18 +32,22 @@ class Team {
   }
 
 
+  //return an array of all the vertices
   def vertices(): ArrayBuffer[(VertexId, Int)] = {
     val result = teamMembers.zipWithIndex.map{case (creature, index) => (index.toLong, creature)}
 
     result
   }
 
+  //return an array of all the edges
   def edges(): ArrayBuffer[Edge[Int]] = {
+    val length = teamMembers.length
     val result =
-      for (i <- 0 until teamMembers.length; j <- (i + 1) until teamMembers.length)
-        yield Edge(i.toLong, j.toLong, 1)
+      for (compt1 <- 0 until length; compt2 <- (compt1 + 1) until length)
+        yield Edge(compt1.toLong, compt2.toLong, 1)
 
     result.to[mutable.ArrayBuffer]
   }
+
 
 }

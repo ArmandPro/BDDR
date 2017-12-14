@@ -28,6 +28,12 @@ abstract class AbstractCreature(val name : String) {
   }
 
 
+  def refresh(): Unit ={
+    hp = math.min(this.hp+regen, hpMax)
+
+  }
+
+
   //generate a random value of the diceNum roll of facesNum dice
   def dice(diceNum : Int, facesNum : Int) : Int={
 

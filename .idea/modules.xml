@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/bddr.iml" filepath="$PROJECT_DIR$/.idea/modules/bddr.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/bddr-build.iml" filepath="$PROJECT_DIR$/.idea/modules/bddr-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/bdd.iml" filepath="$PROJECT_DIR$/.idea/modules/bdd.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/bdd-build.iml" filepath="$PROJECT_DIR$/.idea/modules/bdd-build.iml" />
     </modules>
   </component>
 </project>
