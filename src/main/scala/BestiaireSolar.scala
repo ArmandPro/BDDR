@@ -11,6 +11,6 @@
 
   var baseMeleeAttack = Array(4, 15, 18, 3, 6, 21, 0)
 
-  val team = "Allies"
+  val team = "coalition"
 
 }

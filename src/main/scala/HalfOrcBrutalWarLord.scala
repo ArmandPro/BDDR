@@ -8,8 +8,8 @@ class HalfOrcBrutalWarLord extends AbstractCreature("Brutal Warlord Half Orc") {
   var armor = 27
 
 
-  var baseMeleeAttack = Array(3, 4, 10, 1, 8, 19, 0)//???
+  //var baseMeleeAttack = Array(3, 4, 10, 1, 8, 19, 0)//???
 
-  val team = "Enemies"
+  val team = "enemy"
 
 }
