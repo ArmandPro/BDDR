@@ -6,7 +6,6 @@
 abstract class AbstractCreature(val name : String) {
 
 
-
   var hp : Int
   val hpMax : Int
   var armor : Int
@@ -29,7 +28,7 @@ abstract class AbstractCreature(val name : String) {
   }
 
 
-  //genarate a random value of the diceNum roll of facesNum dice
+  //generate a random value of the diceNum roll of facesNum dice
   def dice(diceNum : Int, facesNum : Int) : Int={
 
     val r = scala.util.Random
