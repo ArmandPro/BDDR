@@ -6,16 +6,7 @@
 //imports
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
-import org.apache.spark.sql.SQLContext
-import scala.util.parsing.json._
-import org.apache.spark.graphx._
-// To make some of the examples work we will also need RDD
-import org.apache.spark.rdd.RDD
-import org.apache.spark.graphx.{Graph, VertexId}
-import org.apache.spark.graphx.util.GraphGenerators
-import scala.collection.JavaConversions._
-import com.google.gson.Gson
-import org.json4s.JsonAST._
+
 
 
 
