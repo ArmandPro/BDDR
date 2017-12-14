@@ -8,7 +8,7 @@ class HalfOrcWorgRider extends AbstractCreature("Worg Rider Half Orc") {
   var armor = 18
 
 
-  //var baseMeleeAttack = Array(3, 4, 10, 1, 8, 19, 0)//???
+  var baseMeleeAttack = Array(3, 4, 10, 1, 8, 19, 0)//???
 
   val team = "enemy"
 

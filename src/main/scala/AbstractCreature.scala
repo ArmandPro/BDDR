@@ -1,25 +1,19 @@
+
+
+import org.apache.spark.broadcast.Broadcast
+import org.apache.spark.graphx.{Graph, VertexId}
+
 /**
   * Created by Etudes on 13/12/2017.
   */
-
-import java.util
-import org.apache.spark._
-import org.apache.spark.broadcast.Broadcast
-import org.apache.spark.graphx.{Graph, VertexId}
 
 
 abstract class AbstractCreature(val name : String) {
 
 
-
-
   var hp : Int
   val hpMax : Int
   var armor : Int
-
-  var posX : Int = scala.util.Random.nextInt(101)
-  var posY : Int = scala.util.Random.nextInt(101)
-  var posZ : Int = 0
 
   val regen: Int = 0
 
@@ -27,14 +21,16 @@ abstract class AbstractCreature(val name : String) {
 
   val team : String
 
-  var dead : Boolean = false
+  val dead : Boolean = false
 
-  def isDead: Boolean = {
+  var baseMeleeAttack : Array[Int]
+
+  def isDead(): Boolean = {
     if (hp <= 0) true
     else false
   }
 
-  def getSide: String ={
+  def getSide(): String ={
     this.team
   }
 
@@ -44,31 +40,29 @@ abstract class AbstractCreature(val name : String) {
 
   }
 
-
   //generate a random value of the diceNum roll of facesNum dice
   def dice(diceNum : Int, facesNum : Int) : Int={
 
     val r = scala.util.Random
     var sum = 0
-    var compt = 0
+    var i = 0
 
-    for(compt <- 1 to diceNum){
-    sum += r.nextInt(facesNum)
-    sum += 1
+    for(i <- 1 to diceNum){
+      sum += r.nextInt(facesNum)
+      sum += 1
     }
-  sum
+    sum
   }
-
 
   def naiveAttack(id: VertexId, graph: Graph[Int, Int], store: Broadcast[CommonCreature.type]) : Unit =
   {
 
     var played = false
 
-    val result = findLowestHealthEnemy(id, graph, store)
+    val result = findClosestEnemy(id, graph, store)
 
     if (result._2 != -1)
-      played = melee(this.baseMeleeAttack, store.value.get(result._2))
+      played = melee(this.baseMeleeAttack, store.value.getAbstractCreature(result._2))
 
     if (!played) {
       println(s"\t$name can't do anything\n")
@@ -104,13 +98,38 @@ abstract class AbstractCreature(val name : String) {
   }
 
 
-  def  isDead() : Boolean = {
-     if(hp<0)
-       this.dead = true
+  def melee (attaque : Array[Int], target: AbstractCreature): Boolean=
+  {
+    val numberOfAttacks = attaque(0)
+    val precision = attaque(1)
+    val damage = attaque(2)
+    val numberOfDices = attaque (3)
+    val sizeOfDice = attaque(4)
 
-    dead
+    var numberOfAttackLeft = numberOfAttacks
+
+    while(!target.isDead && numberOfAttackLeft>0){
+      val dicePourToucher = dice(1,20)
+      val toucher = precision + numberOfAttackLeft*5 + dicePourToucher
+
+      val targetName = target.name
+
+      numberOfAttackLeft -= 1
+
+      if (toucher > target.armor ){
+        var degats = damage +  dice(numberOfDices, sizeOfDice)
+
+        // La il y a un truc en plus mais je sais pas pourquoi, j'ai pas trouvé cette règle
+
+        var degatsEffectifs = math.max(0,(degats-target.damageReduction))
+        target.hp -= degatsEffectifs
+
+        println(s"$name inflige $degatsEffectifs a $targetName")
+      }
+      else
+        println (s"$name rate $targetName")
+    }
+    true
   }
-
-
 
 }

@@ -27,7 +27,7 @@ class Team {
 
     for (i <- 0 until number) {
       val crea = classe.newInstance()
-      teamMembers += CommonCreature.add(crea)
+      teamMembers += CommonCreature.addAbstractCreature(crea)
     }
   }
 
